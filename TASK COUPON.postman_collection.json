@@ -1,0 +1,255 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TASK COUPON",
+		"_postman_id": "e8e76302-68c0-c873-462f-674266cef9cc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "coupon",
+			"description": "",
+			"item": [
+				{
+					"name": "coupon create",
+					"request": {
+						"url": "{{baseUrl}}coupon/create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"offername\" : \"maysecondweek\",\n\t\"couponcode\" :\"myscnd123\",\n\t\"startdate\" : \"5/11/2022\",\n\t\"enddate\" : \"6/11/2022\",\n\t\"discountPercent\" : \"15\",\n\t\"discountAmount\" : \"150\",\n\t\"termsandcond\" : \"Hey This coupon valid!!!\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "coupon delete",
+					"request": {
+						"url": "{{baseUrl}}coupon/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"62820522efad7d25f07f4e26\"\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "coupon update",
+					"request": {
+						"url": "{{baseUrl}}coupon/update/62820522efad7d25f07f4e26",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"offername\" : \"maythirdweek\",\n\t\"couponcode\" :\"mrthrd123\",\n\t\"startdate\" : \"5/16/2022\",\n\t\"enddate\" : \"6/16/2022\",\n\t\"discountPercent\" : \"5\",\n\t\"discountAmount\" : \"500\",\n\t\"termsandcond\" : \"Hey This coupon valid!!!\",\n\t\"status\" : \"1\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "coupon list",
+					"request": {
+						"url": {
+							"raw": "{{baseUrl}}coupon/list",
+							"host": [
+								"{{baseUrl}}coupon"
+							],
+							"path": [
+								"list"
+							],
+							"query": [
+								{
+									"key": "sortType",
+									"value": "ASC",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "sortKey",
+									"value": "",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderNo\" : \"003\",\n\t\"orderAmount\" :  \"200.00\",\n\t\"orderDetail\" : [\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380b\",\n    \t\t\"qty\": 1,\n    \t\t\"price\": \"100.00\"\n\t\t},\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380d\",\n    \t\t\"qty\": 2,\n    \t\t\"price\": \"400.00\"\n\t\t}\n\t]\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "coupon status",
+					"request": {
+						"url": "{{baseUrl}}coupon/status",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"62820522efad7d25f07f4e26\",\n\t\"status\" : \"1\"\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "coupon image upload",
+					"request": {
+						"url": "{{baseUrl}}coupon/imageUpload/628207ac13fbf425b4f35b62",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offer_image",
+									"description": "",
+									"type": "file",
+									"src": "download.jpg"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login / register",
+			"description": "",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"url": "{{baseUrl}}login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"admin@gmail.com\",\n\t\"password\" : \"123456\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"url": "{{baseUrl}}register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"alagu@gmail.com\",\n\t\"password\" : \"1234567\",\n\t\"name\" : \"admin\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
