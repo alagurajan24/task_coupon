@@ -87,15 +87,143 @@
 					"response": []
 				},
 				{
-					"name": "coupon list",
+					"name": "searchRecord",
 					"request": {
 						"url": {
-							"raw": "{{baseUrl}}coupon/list",
+							"raw": "{{baseUrl}}coupon/searchRecord",
 							"host": [
 								"{{baseUrl}}coupon"
 							],
 							"path": [
-								"list"
+								"searchRecord"
+							],
+							"query": [
+								{
+									"key": "sortType",
+									"value": "ASC",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "sortKey",
+									"value": "",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"search\" : \"maythirdweek\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "pagiRecord",
+					"request": {
+						"url": {
+							"raw": "{{baseUrl}}coupon/pagiRecord",
+							"host": [
+								"{{baseUrl}}coupon"
+							],
+							"path": [
+								"pagiRecord"
+							],
+							"query": [
+								{
+									"key": "sortType",
+									"value": "ASC",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "sortKey",
+									"value": "",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"currentPage\" : \"1\",\n\t\"pageSize\" : \"1\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "sortRecord",
+					"request": {
+						"url": {
+							"raw": "{{baseUrl}}coupon/sortRecord",
+							"host": [
+								"{{baseUrl}}coupon"
+							],
+							"path": [
+								"sortRecord"
 							],
 							"query": [
 								{
@@ -135,11 +263,16 @@
 								"key": "Authorization",
 								"value": "{{token}}",
 								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"orderNo\" : \"003\",\n\t\"orderAmount\" :  \"200.00\",\n\t\"orderDetail\" : [\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380b\",\n    \t\t\"qty\": 1,\n    \t\t\"price\": \"100.00\"\n\t\t},\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380d\",\n    \t\t\"qty\": 2,\n    \t\t\"price\": \"400.00\"\n\t\t}\n\t]\n}\n"
+							"raw": ""
 						},
 						"description": ""
 					},

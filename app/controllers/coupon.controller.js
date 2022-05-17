@@ -128,46 +128,15 @@ exports.status = (req, res) => {
     });
 }
 
-exports.list = async (req, res) => {
-    // for sorting
-    var sortKey = (req.query.sortKey != undefined) ? req.query.sortKey : '_id';
-    var sortType = (req.query.sortType == 'ASC') ? 1 : -1;
-    const sort = {}
-    sort[sortKey] = sortType
-    // for searching
-    var searchString = req.query.search;
-    // for limit and offset
-    var limit = parseInt(req.query.limit);
-    var skip = parseInt(req.query.skip);
-    // for searching
-    var search = req.query.search;
-
-    // var sk = (search != undefined && search != '') ? { $text: { $search: search } } : trim(' ');
-    // console.log(sk, 'jhbhbh');
-
-    // Coupon.find(sk).limit(limit).skip(skip).sort(sort).exec((err, docs) => {
-    //     res.send(docs)
-    // });
-    console.log(search, 'search')
-    if (search != undefined && search != '') {
-        Coupon.find({ $text: { $search: search }, status: { $ne: 2 } }).limit(limit).skip(skip).sort(sort).exec((err, docs) => {
-            res.send({
-                status: 'success',
-                message: 'Coupon listed successfully',
-                data: docs
-            });
-        });
-    } else {
-        // Coupon.find().limit(limit).skip(skip).sort(sort).exec((err, docs) => {
-        Coupon.find({ status: { $ne: 2 } }).exec((err, docs) => {
-            res.send({
-                status: 'success',
-                message: 'Coupon listed successfully',
-                data: docs
-            });
-        });
-    }
-}
+// exports.list = async (req, res) => {
+//     Coupon.find({ status: { $ne: 2 } }).exec((err, docs) => {
+//         res.send({
+//             status: 'success',
+//             message: 'Coupon listed successfully',
+//             data: docs
+//         });
+//     });
+// }
 
 exports.import = (req, res) => {
     const id = req.params.id;
@@ -202,3 +171,103 @@ var storage = multer.diskStorage({
         cb(null, file.originalname);
     }
 });
+
+// search record 
+exports.searchRecord = (req, res) => {
+    try {
+        if (!req.body) {
+            responseObj = {
+                status: "error",
+                message: 'Input is missing.',
+                data: {}
+            }
+            res.status(500).send(responseObj);
+        } else {
+            //exact match
+            Coupon.find({ offername: { $regex: `^${req.body.search}`, $options: 'i' } }, (err, docs) => {
+                if (err) {
+                    responseObj = {
+                        status: "error",
+                        message: 'Something went wrong',
+                        data: err
+                    }
+                    res.status(500).send(responseObj);
+                } else {
+                    responseObj = {
+                        status: "success",
+                        message: 'Record found.',
+                        data: docs
+                    }
+                    res.status(200).send(responseObj);
+                }
+            })
+        }
+    } catch (error) {
+        console.log('Error::', error);
+    }
+}
+
+// pagination record
+exports.pagiRecord =  (req, res) => {
+    try {
+        if (!req.body) {
+            responseObj = {
+                status: "error",
+                message: 'Input is missing.',
+                data: err
+            }
+            res.status(500).send(responseObj);
+        } else {
+            const currentPage = parseInt(req.body.currentPage);//2
+            const pageSize = parseInt(req.body.pageSize); //10
+
+            const skip = pageSize * (currentPage - 1);
+            const limit = pageSize;
+
+             Coupon.find({}).skip(skip).limit(limit).exec((err, docs) => {
+                if (err) {
+                    responseObj = {
+                        status: "error",
+                        message: 'Something went wrong',
+                        data: err
+                    }
+                    res.status(500).send(responseObj);
+                } else {
+                    responseObj = {
+                        status: "success",
+                        message: 'Record found.',
+                        data: docs
+                    }
+                    res.status(200).send(responseObj);
+                }
+            })
+        }
+    } catch (error) {
+        console.log('Error::', error);
+    }
+}
+
+// sorting record
+exports.sortRecord = (req, res) => {
+    try {
+        Coupon.find({}).sort({ createdAt: -1 }).exec((err, docs) => {
+            if (err) {
+                responseObj = {
+                    status: "error",
+                    message: 'Input is missing.',
+                    data: err
+                }
+                res.status(500).send(responseObj);
+            } else {
+                responseObj = {
+                    status: "success",
+                    message: 'Fetch Record.',
+                    data: docs
+                }
+                res.status(200).send(responseObj);
+            }
+        })
+    } catch (error) {
+        console.log('Error', error);
+    }
+}
